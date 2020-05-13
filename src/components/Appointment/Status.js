@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 const classnames = require("classnames");
 
-export default function Confirm(props) {
+export default function Status(props) {
   return (
-    <main className="appointment__card appointment__card--confirm">
+    <main className="appointment__card appointment__card--status">
+      <img
+        className="appointment__status-image"
+        src="images/status.png"
+        alt="Loading"
+      />
       <h1 className="text--semi-bold">{props.message}</h1>
-      <section className="appointment__actions">
-        <Button danger onClick={props.onCancel}>Cancel</Button>
-        <Button danger onClick={props.onConfirm}>Confirm</Button>
-      </section>
     </main>
   );
 }
