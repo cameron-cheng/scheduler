@@ -6,11 +6,19 @@ import "./style.scss";
 import useVisualMode from "hooks/useVisualMode";
 import Form from "./Form";
 import Status from "./Status"
+import Confirm from "./Confirm"
+import Error from "./Error"
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const DELETE = "DELETE";
+const CONFIRM ="CONFIRM";
+const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE" 
+const ERROR_DELETE = "ERROR_DELETE"
+
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -25,6 +33,14 @@ export default function Appointment(props) {
     transition(SAVING)
     props.bookInterview(interview)
     .then(() => transition(SHOW))
+    .catch(() => transition(ERROR_SAVE, true))
+  };
+
+  function cancel() {
+    transition(DELETE)
+    props.cancelInterview()
+    .then(() => transition(EMPTY))
+    .catch(() => transition(ERROR_DELETE, true))
   }
   
   return (
@@ -35,6 +51,8 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={() => transition(CONFIRM) }
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
@@ -44,6 +62,30 @@ export default function Appointment(props) {
       />)}
       {mode === SAVING && (
         <Status message="Saving"/>
+      )}
+      {mode === DELETE && (
+        <Status message="Deleting"/>
+      )}
+      {mode === CONFIRM && (
+        <Confirm message="Are you sure you want to delete?" onCancel={back} onConfirm={cancel} />
+      )}
+      {mode === EDIT && (
+      <Form name={props.interview.student} interviewers={props.interviewers} 
+      interviewer = {props.interview.interviewer}
+      onCancel={back}
+      onSave={save}
+      />)}
+      {mode === ERROR_SAVE && (
+        <Error 
+          message="SAVE ERROR"
+          onClose={back}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error 
+          message="DELETE ERROR"
+          onClose={back}
+        />
       )}
     </article>
   );
