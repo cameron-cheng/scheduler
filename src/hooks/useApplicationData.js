@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
- const useApplicationData = () => {
+import { getSpotsForDay } from "../helpers/selectors"
+const useApplicationData = () => {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -23,6 +23,8 @@ import axios from "axios";
     );
   }, []);
 
+
+
   function bookInterview(id, interview) {
     console.log(id, interview);
     const appointment = {
@@ -35,7 +37,12 @@ import axios from "axios";
     };
     return axios
       .put(`/api/appointments/${id}`, { interview })
-      .then(() => setState({ ...state, appointments }));
+      .then(() => {
+        const days = state.days.map(day => {
+          return {...day, spots: getSpotsForDay({ ...state, appointments }, day.name)}
+        })
+        setState({ ...state, appointments, days })
+        })
   }
 
   function cancelInterview(id) {
@@ -49,7 +56,13 @@ import axios from "axios";
     };
     return axios
       .delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => {
+              
+      const days = state.days.map(day => {
+        return {...day, spots: getSpotsForDay({ ...state, appointments }, day.name)}
+      })
+      setState({ ...state, appointments, days })
+      })
   }
 
   return { state, setDay, bookInterview, cancelInterview };

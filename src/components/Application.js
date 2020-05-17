@@ -28,8 +28,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={getInterview(state, appointment.interview)}
         interviewers={interviewers}
-        bookInterview={bookInterview}
-        cancelInterview={cancelInterview}
+        bookInterview={(interview) => bookInterview(appointment.id, interview)}
+        cancelInterview={() => cancelInterview(appointment.id)}
       />
     );
   });
