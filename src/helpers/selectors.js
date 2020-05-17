@@ -14,11 +14,19 @@ export function getAppointmentsForDay(state, day) {
 
 export function getInterview(state, interview) {
   if (interview) {
-    const student = interview.student;
-    const interviewer = state.interviewers[interview.interviewer];
-    const interviewData = { student, interviewer };
-    return interviewData;
-  } else {
-    return null;
+    const interviewer = state.interviewers[interview.interviewer]
+    return {
+      ...interview,
+      interviewer
+    }
+  } 
+  return null
+}
+
+export function getInterviewersForDay(state, day) {
+  const dayObj = state.days.find(dayObj => dayObj.name === day)
+  if (dayObj) {
+    return dayObj.interviewers.map(id => state.interviewers[id])
   }
+  return []
 }
