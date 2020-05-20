@@ -8,8 +8,7 @@ import {
   getInterview,
   getInterviewersForDay,
 } from "../helpers/selectors";
-import useApplicationData from "../hooks/useApplicationData"
-
+import useApplicationData from "../hooks/useApplicationData";
 
 export default function Application(props) {
   const {
@@ -58,7 +57,8 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointmentList}
-        <Appointment id="last" time="6pm" /> 
+        <Appointment id="last" time="6pm" />
+         
       </section>
     </main>
   );

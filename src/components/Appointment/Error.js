@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-const classnames = require("classnames");
 
 export default function Error(props) {
   return (

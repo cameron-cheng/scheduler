@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-const classnames = require("classnames");
+import React from "react";
 
 export default function Status(props) {
   return (

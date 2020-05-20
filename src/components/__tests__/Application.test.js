@@ -36,7 +36,6 @@ describe("tests", () => {
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
 
-    console.log(prettyDOM(appointment));
     fireEvent.click(getByAltText(appointment, "Add"));
 
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
@@ -129,7 +128,6 @@ describe("tests", () => {
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
 
-    console.log(prettyDOM(appointment));
     fireEvent.click(getByAltText(appointment, "Add"));
 
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
@@ -139,8 +137,6 @@ describe("tests", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
     fireEvent.click(getByText(appointment, "Save"));
-
-    // await waitForElement (() => !getByText(appointment, "Saving"))
 
     await waitForElement(() => getByText(appointment, "SAVE ERROR"));
   });
@@ -159,6 +155,5 @@ describe("tests", () => {
     fireEvent.click(queryByAltText(appointment, "Delete"));
     fireEvent.click(getByText(appointment, "Confirm"));
     await waitForElement(() => getByText(appointment, "DELETE ERROR"));
-
   });
 });

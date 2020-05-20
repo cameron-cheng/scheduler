@@ -30,4 +30,4 @@ InterviewerList.propTypes = {
   setInterviewerState: PropTypes.func.isRequired,
 };
 
-export default InterviewerList
+export default InterviewerList;

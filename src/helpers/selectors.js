@@ -14,25 +14,25 @@ export function getAppointmentsForDay(state, day) {
 
 export function getInterview(state, interview) {
   if (interview) {
-    const interviewer = state.interviewers[interview.interviewer]
+    const interviewer = state.interviewers[interview.interviewer];
     return {
       ...interview,
-      interviewer
-    }
-  } 
-  return null
+      interviewer,
+    };
+  }
+  return null;
 }
 
 export function getInterviewersForDay(state, day) {
-  const dayObj = state.days.find(dayObj => dayObj.name === day)
+  const dayObj = state.days.find((dayObj) => dayObj.name === day);
   if (dayObj) {
-    return dayObj.interviewers.map(id => state.interviewers[id])
+    return dayObj.interviewers.map((id) => state.interviewers[id]);
   }
-  return []
+  return [];
 }
 
 export function getSpotsForDay(state, day) {
   return getAppointmentsForDay(state, day).reduce((acc, curr) => {
-    return curr.interview === null ? ++acc : acc
-  }, 0)
+    return curr.interview === null ? ++acc : acc;
+  }, 0);
 }
