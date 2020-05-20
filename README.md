@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+Webapp to help manage interviews and interviewers.
+
 ## Setup
 
 Install dependencies with `npm install`.
