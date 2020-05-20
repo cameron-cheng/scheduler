@@ -14,12 +14,14 @@ const useApplicationData = () => {
     const promise2 = axios.get("/api/appointments");
     const promise3 = axios.get("/api/interviewers");
 
-    Promise.all([promise1, promise2, promise3]).then((all) =>
+    Promise.all([promise1, promise2, promise3])
+    .then((all) => {
       setState((prev) => ({
+        day: prev.day,
         days: all[0].data,
         appointments: all[1].data,
         interviewers: all[2].data,
-      }))
+      }))}
     );
   }, []);
 

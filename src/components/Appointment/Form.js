@@ -15,13 +15,14 @@ export default function Form(props) {
     reset();
     props.onCancel();
   };
-  
+
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     }
 
+    setError("");
     props.onSave(name, interviewer);
   }
 
@@ -39,7 +40,7 @@ export default function Form(props) {
           />
           <section className="appointment__validation">{error}</section>
         </form>
-        
+
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
