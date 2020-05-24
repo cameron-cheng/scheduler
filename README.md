@@ -5,6 +5,7 @@ Webapp to help manage interviews and interviewers.
 ## Setup
 
 Install dependencies with `npm install`.
+Please install the Scheduler-API from this repo before running the app
 
 ## Running Webpack Development Server
 
