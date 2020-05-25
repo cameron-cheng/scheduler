@@ -74,14 +74,14 @@ export default function Appointment(props) {
         />
       )}
       {mode === EDIT && (
-        <Form
+       <Form
           name={props.interview.student}
           interviewers={props.interviewers}
-          interviewer={props.interview.interviewer}
+          interviewer={props.interview.interviewer.id}
           onCancel={back}
           onSave={save}
         />
-      )}
+      )} 
       {mode === ERROR_SAVE && <Error message="SAVE ERROR" onClose={back} />}
       {mode === ERROR_DELETE && <Error message="DELETE ERROR" onClose={back} />}
     </article>
